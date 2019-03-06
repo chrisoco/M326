@@ -1,18 +1,22 @@
 package ch.oconnor;
 
+import ch.oconnor.backend.DB;
+import ch.oconnor.backend.Kinobuchungssystem;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 
 public class Main extends Application {
 
 	public Stage primaryStage;
-	public BorderPane rootLayout;
+	public BorderPane rootPane;
+
+	public static DB db = new DB();
+	public static Kinobuchungssystem KBS = new Kinobuchungssystem();
+
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -21,29 +25,24 @@ public class Main extends Application {
 		this.primaryStage.setTitle("M326 Kinobuchungssystem");
 
 
+		initFXML();
+
 	}
 
 
-	public void initRootLayout() {
+	private void initFXML() {
 
 		try {
-			
-			// Load root layout from FXML file.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource(""));
-			rootLayout = (BorderPane) loader.load();
 
-			// Show the scene containing the root layout.
-			Scene scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/Layout.fxml"));
+			rootPane = (BorderPane) loader.load();
+
+			primaryStage.setScene(new Scene(rootPane));
 			primaryStage.setResizable(false);
 			primaryStage.show();
 
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		} catch (Exception e) {}
 
 	}
 
