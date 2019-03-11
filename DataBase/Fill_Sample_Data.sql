@@ -2,7 +2,21 @@ use m326;
 
 
 /* Movies */
-INSERT INTO `tbl_Film` (`name`) VALUES ("Captain Marvel"),("Godzilla II"),("Star Wars: IX"),("X-Men");
+INSERT INTO `tbl_Film` (`name`, `desc`) VALUES 
+
+    ("Alita Battle Angel", 
+    "Eine Cyborg-Frau erwacht in einer fremden Welt der Zukunft und wird von einem Wissenschaftler aufgenommen."),
+
+	("Captain Marvel", 
+    "Lange vor den Avengers steigt Carol Danvers alias Captain Marvel in den 90ern zu einer bedeutenden Superheldin auf."),
+    
+    ("Chaos im Netz", 
+    "Ralph stürzt sich ins Internet, um nach einem wichtigen Ersatzteil zu suchen und begegnet dabei vielen schrägen Figuren."),
+    
+    ("Hard Powder", 
+    "Nachdem sein Sohn von einem Drogenboss ermordet wird, begibt sich ein Schneepflugfahrer auf Rachefeldzug.");
+    
+    
 
 /* Kinosaal */
 INSERT INTO `tbl_Kinosaal` (`saalName`) VALUES ("UG, 01"),("UG, 02"),("EG, 01");

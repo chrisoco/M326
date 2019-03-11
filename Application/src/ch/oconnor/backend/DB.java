@@ -1,5 +1,15 @@
 package ch.oconnor.backend;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,18 +52,39 @@ public class DB {
 
 		try {
 
-			rs = st.executeQuery("SELECT `name` FROM tbl_film;");
+			rs = st.executeQuery("SELECT * FROM tbl_film;");
 
 			while(rs.next()) {
 
-				result.add(new Film(rs.getString(1)));
+				result.add(new Film(
+
+						rs.getString(2),
+						rs.getString(3),
+						getImg(rs.getBinaryStream(4)))
+				);
 
 			}
 
-		} catch (SQLException e) {}
+		} catch (Exception e) {}
 
 		return result;
 	}
+
+
+	private Image getImg(InputStream is) {
+
+		try {
+
+			return SwingFXUtils.toFXImage(ImageIO.read(is), null);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
 
 
 	public List<Kinosaal> getAllKinosaal() {
@@ -149,7 +180,7 @@ public class DB {
 
 			while(rs.next()) {
 
-				result.add(new Platz(rs.getString(1), rs.getInt(2), rs.getString(3)));
+				result.add(new Platz(vorstellungID, rs.getString(1), rs.getInt(2), rs.getString(3)));
 
 			}
 

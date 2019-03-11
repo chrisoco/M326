@@ -1,6 +1,8 @@
 package ch.oconnor.backend;
 
+
 import ch.oconnor.Main;
+
 import java.util.List;
 
 public class Kinobuchungssystem {
@@ -17,8 +19,10 @@ public class Kinobuchungssystem {
 		kinosaalList    = Main.db.getAllKinosaal();
 		vorstellungList = Main.db.getAllVorstellungen(filmList, kinosaalList);
 
+	}
 
-
+	public List<Film> getFilmList() {
+		return filmList;
 	}
 
 }

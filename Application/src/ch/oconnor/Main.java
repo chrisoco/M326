@@ -1,7 +1,7 @@
 package ch.oconnor;
 
+
 import ch.oconnor.backend.DB;
-import ch.oconnor.backend.Kinobuchungssystem;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +15,6 @@ public class Main extends Application {
 	public BorderPane rootPane;
 
 	public static DB db = new DB();
-	public static Kinobuchungssystem KBS = new Kinobuchungssystem();
 
 
 	@Override

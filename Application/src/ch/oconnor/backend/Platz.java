@@ -2,12 +2,13 @@ package ch.oconnor.backend;
 
 public class Platz {
 
+	private int vorstellungID, num;
 	private String reihe;
-	private int num;
 	private Besucher besucher;
 
-	public Platz(String reihe, int num, String besucherTel) {
+	public Platz(int vorstellungID, String reihe, int num, String besucherTel) {
 
+		this.vorstellungID = vorstellungID;
 		this.reihe = reihe;
 		this.num = num;
 
@@ -15,12 +16,12 @@ public class Platz {
 
 	}
 
-	public Besucher getBesucher() {
-		return besucher;
+	public int getVorstellungID() {
+		return vorstellungID;
 	}
 
-	public void setBesucher(Besucher besucher) {
-		this.besucher = besucher;
+	public void setVorstellungID(int vorstellungID) {
+		this.vorstellungID = vorstellungID;
 	}
 
 	public String getReihe() {
@@ -37,6 +38,14 @@ public class Platz {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public Besucher getBesucher() {
+		return besucher;
+	}
+
+	public void setBesucher(Besucher besucher) {
+		this.besucher = besucher;
 	}
 
 }
