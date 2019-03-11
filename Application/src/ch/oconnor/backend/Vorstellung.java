@@ -20,6 +20,18 @@ public class Vorstellung {
 
 	}
 
+	public Vorstellung(Kinosaal kinosaal, Film film, LocalDateTime zeit) {
+		this.kinosaal = kinosaal;
+		this.film = film;
+		this.zeit = zeit;
+	}
 
+	public LocalDateTime getZeit() {
+		return zeit;
+	}
+
+	public Film getFilm() {
+		return film;
+	}
 
 }

@@ -13,9 +13,7 @@ import java.io.OutputStream;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class DB {
 
@@ -46,9 +44,9 @@ public class DB {
 	}
 
 
-	public List<Film> getAllFilms() {
+	public Map<String, Film> getAllFilms() {
 
-		ArrayList<Film> result = new ArrayList<>();
+		TreeMap<String, Film> result = new TreeMap<>();
 
 		try {
 
@@ -56,11 +54,11 @@ public class DB {
 
 			while(rs.next()) {
 
-				result.add(new Film(
-
-						rs.getString(2),
-						rs.getString(3),
-						getImg(rs.getBinaryStream(4)))
+				result.put(rs.getString(2),
+								new Film(
+										rs.getString(2),
+										rs.getString(3),
+										getImg(rs.getBinaryStream(4)))
 				);
 
 			}
@@ -87,9 +85,9 @@ public class DB {
 
 
 
-	public List<Kinosaal> getAllKinosaal() {
+	public Map<String, Kinosaal> getAllKinosaal() {
 
-		ArrayList<Kinosaal> result = new ArrayList<>();
+		Map<String, Kinosaal> result = new TreeMap<>();
 
 		try {
 
@@ -97,7 +95,7 @@ public class DB {
 
 			while(rs.next()) {
 
-				result.add(new Kinosaal(rs.getString(1)));
+				result.put(rs.getString(1), new Kinosaal(rs.getString(1)));
 
 			}
 
@@ -108,7 +106,7 @@ public class DB {
 	}
 
 
-	public List<Vorstellung> getAllVorstellungen(List<Film> filmList, List<Kinosaal> kinosaalList) {
+	public List<Vorstellung> getAllVorstellungen(Map<String, Film> filmMap, Map<String, Kinosaal> kinosaalMap) {
 
 		ArrayList<Vorstellung> result = new ArrayList<>();
 
@@ -129,16 +127,22 @@ public class DB {
 
 			while(rs.next()) {
 
-				result.add(new Vorstellung(
-								rs.getInt(1),
-								getFilmByName(filmList, rs.getString(2)),
-								getSaalByName(kinosaalList, rs.getString(3)),
-								parseDate(rs.getString(4))
-							));
+				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
+
+				Vorstellung v = new Vorstellung(kinosaalMap.get(rs.getString(3)), filmMap.get(rs.getString(2)), parseDate(rs.getString(4)));
+
+//				result.add(new Vorstellung(
+//								rs.getInt(1),
+//								getFilmByName(filmList, rs.getString(2)),
+//								getSaalByName(kinosaalList, rs.getString(3)),
+//								parseDate(rs.getString(4))
+//							));
 
 			}
 
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
 
 
 		return result;
@@ -147,18 +151,22 @@ public class DB {
 
 	private Film getFilmByName(List<Film> filmList, String name) {
 
+		Film film = null;
+
 		for (Film f : filmList) {
-			if (f.getName().equals(name)) return f;
+			if (f.getName().equals(name)) film = f;
 		}
-		return null;
+		return film;
 	}
 
 	private Kinosaal getSaalByName(List<Kinosaal> kinosaalList, String name) {
 
+		Kinosaal kinosaal = null;
+
 		for (Kinosaal k : kinosaalList) {
-			if (k.getSaalName().equals(name)) return k;
+			if (k.getSaalName().equals(name)) kinosaal = k;
 		}
-		return null;
+		return kinosaal;
 	}
 
 	private LocalDateTime parseDate(String sqlDate) {

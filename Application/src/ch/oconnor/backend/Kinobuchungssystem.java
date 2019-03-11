@@ -4,25 +4,29 @@ package ch.oconnor.backend;
 import ch.oconnor.Main;
 
 import java.util.List;
+import java.util.Map;
 
 public class Kinobuchungssystem {
 
-	private List<Film> filmList;
-	private List<Kinosaal> kinosaalList;
+	private Map<String,Film> filmMap;
+	private Map<String, Kinosaal> kinosaalMap;
 	private List<Vorstellung> vorstellungList;
 
 
 
 	public Kinobuchungssystem() {
 
-		filmList        = Main.db.getAllFilms();
-		kinosaalList    = Main.db.getAllKinosaal();
-		vorstellungList = Main.db.getAllVorstellungen(filmList, kinosaalList);
+		filmMap        = Main.db.getAllFilms();
+
+		kinosaalMap    = Main.db.getAllKinosaal();
+
+		vorstellungList = Main.db.getAllVorstellungen(filmMap, kinosaalMap);
+
 
 	}
 
-	public List<Film> getFilmList() {
-		return filmList;
+	public List<Vorstellung> getVorstellungList() {
+		return vorstellungList;
 	}
 
 }
