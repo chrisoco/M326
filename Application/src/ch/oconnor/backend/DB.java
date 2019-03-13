@@ -2,14 +2,8 @@ package ch.oconnor.backend;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -75,9 +69,7 @@ public class DB {
 
 			return SwingFXUtils.toFXImage(ImageIO.read(is), null);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {}
 
 		return null;
 
@@ -114,60 +106,39 @@ public class DB {
 		try {
 
 			rs = st.executeQuery("SELECT tbl_Vorstellung_ID, f.name, k.saalName, zeitpunkt"
-										+ " FROM tbl_vorstellung"
+												+ " FROM tbl_vorstellung"
 
-										+ " LEFT join tbl_Film AS f"
-										+ " ON tbl_Film_FK = f.tbl_Film_ID"
+												+ " LEFT join tbl_Film AS f"
+												+ " ON tbl_Film_FK = f.tbl_Film_ID"
 
-										+ " LEFT JOIN tbl_Kinosaal AS k"
-										+ " ON tbl_Kinosaal_FK = k.tbl_Kinosaal_ID"
+												+ " LEFT JOIN tbl_Kinosaal AS k"
+												+ " ON tbl_Kinosaal_FK = k.tbl_Kinosaal_ID"
 
-										+ " ORDER BY zeitpunkt;"
-								);
+												+ " ORDER BY zeitpunkt;"
+										);
 
 			while(rs.next()) {
 
-				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
+				result.add(new Vorstellung(rs.getInt(1),
+						kinosaalMap.get(rs.getString(3)),
+						filmMap.get(rs.getString(2)),
+						parseDate(rs.getString(4))
+				));
 
-				Vorstellung v = new Vorstellung(kinosaalMap.get(rs.getString(3)), filmMap.get(rs.getString(2)), parseDate(rs.getString(4)));
-
-//				result.add(new Vorstellung(
-//								rs.getInt(1),
-//								getFilmByName(filmList, rs.getString(2)),
-//								getSaalByName(kinosaalList, rs.getString(3)),
-//								parseDate(rs.getString(4))
-//							));
 
 			}
 
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
+			for (Vorstellung v : result) {
+				v.setPlatzres(getPlatzRes(v.getID())); // SET ID AS ATTRIBUTE OF KLASS ...
+			}
 
+
+		} catch (SQLException e) {}
 
 		return result;
 
 	}
 
-	private Film getFilmByName(List<Film> filmList, String name) {
-
-		Film film = null;
-
-		for (Film f : filmList) {
-			if (f.getName().equals(name)) film = f;
-		}
-		return film;
-	}
-
-	private Kinosaal getSaalByName(List<Kinosaal> kinosaalList, String name) {
-
-		Kinosaal kinosaal = null;
-
-		for (Kinosaal k : kinosaalList) {
-			if (k.getSaalName().equals(name)) kinosaal = k;
-		}
-		return kinosaal;
-	}
 
 	private LocalDateTime parseDate(String sqlDate) {
 		return LocalDateTime.parse(sqlDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -175,7 +146,7 @@ public class DB {
 
 
 
-	public List<Platz> getPlaetze(int vorstellungID) {
+	public Platzreservierung getPlatzRes(int vorstellungID) {
 
 		LinkedList<Platz> result = new LinkedList<>();
 
@@ -192,9 +163,12 @@ public class DB {
 
 			}
 
+			return new Platzreservierung(result);
+
 		} catch (SQLException e) {}
 
-		return result;
+		return new Platzreservierung(null);
+
 	}
 
 

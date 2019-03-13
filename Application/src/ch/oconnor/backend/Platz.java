@@ -4,15 +4,14 @@ public class Platz {
 
 	private int vorstellungID, num;
 	private String reihe;
-	private Besucher besucher;
+	private String besucherTel;
 
 	public Platz(int vorstellungID, String reihe, int num, String besucherTel) {
 
 		this.vorstellungID = vorstellungID;
 		this.reihe = reihe;
 		this.num = num;
-
-		if (besucherTel != null) this.besucher = new Besucher(besucherTel);
+		this.besucherTel = besucherTel;
 
 	}
 
@@ -40,12 +39,8 @@ public class Platz {
 		this.num = num;
 	}
 
-	public Besucher getBesucher() {
-		return besucher;
-	}
-
-	public void setBesucher(Besucher besucher) {
-		this.besucher = besucher;
+	public String getBesucherTel() {
+		return besucherTel;
 	}
 
 }

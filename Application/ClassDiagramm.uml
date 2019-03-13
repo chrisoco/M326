@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ch.oconnor.backend</OriginalElement>
+  <nodes>
+    <node x="302.10625000000005" y="372.0">ch.oconnor.backend.Vorstellung</node>
+    <node x="525.0" y="680.5">ch.oconnor.backend.Kinobuchungssystem</node>
+    <node x="18.868750000000034" y="0.0">ch.oconnor.backend.Platz</node>
+    <node x="60.66250000000002" y="189.0">ch.oconnor.backend.Platzreservierung</node>
+    <node x="341.80625000000003" y="189.0">ch.oconnor.backend.Kinosaal</node>
+    <node x="0.0" y="592.0">ch.oconnor.backend.DB</node>
+    <node x="584.3625000000001" y="167.0">ch.oconnor.backend.Film</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ch.oconnor.backend.Vorstellung" target="ch.oconnor.backend.Film">
+      <point x="77.5" y="-70.0" />
+      <point x="472.60625000000005" y="352.0" />
+      <point x="613.6125000000001" y="352.0" />
+      <point x="-29.25" y="47.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.DB" target="ch.oconnor.backend.Film">
+      <point x="176.75" y="-136.5" />
+      <point x="429.25" y="562.0" />
+      <point x="645.8625000000001" y="562.0" />
+      <point x="645.8625000000001" y="352.0" />
+      <point x="633.1125000000001" y="352.0" />
+      <point x="-9.75" y="47.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.Vorstellung" target="ch.oconnor.backend.Kinosaal">
+      <point x="-15.5" y="-70.0" />
+      <point x="379.60625000000005" y="322.0" />
+      <point x="411.30625000000003" y="322.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.Kinobuchungssystem" target="ch.oconnor.backend.Film">
+      <point x="52.0" y="-48.0" />
+      <point x="707.0" y="572.0" />
+      <point x="680.25" y="572.0" />
+      <point x="680.25" y="352.0" />
+      <point x="672.1125000000001" y="352.0" />
+      <point x="29.25" y="47.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.DB" target="ch.oconnor.backend.Kinosaal">
+      <point x="-25.25" y="-136.5" />
+      <point x="227.25" y="572.0" />
+      <point x="190.22125000000003" y="572.0" />
+      <point x="190.22125000000003" y="302.0" />
+      <point x="355.70625" y="302.0" />
+      <point x="-55.60000000000002" y="25.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.DB" target="ch.oconnor.backend.Platzreservierung">
+      <point x="-75.75" y="-136.5" />
+      <point x="176.75" y="562.0" />
+      <point x="119.91250000000002" y="562.0" />
+      <point x="-19.75" y="25.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.Kinobuchungssystem" target="ch.oconnor.backend.Kinosaal">
+      <point x="0.0" y="-48.0" />
+      <point x="655.0" y="532.0" />
+      <point x="582.1625" y="532.0" />
+      <point x="582.1625" y="332.0" />
+      <point x="466.90625" y="332.0" />
+      <point x="55.599999999999966" y="25.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.DB" target="ch.oconnor.backend.Platz">
+      <point x="-227.25" y="-136.5" />
+      <point x="25.25" y="572.0" />
+      <point x="39.16250000000002" y="572.0" />
+      <point x="39.16250000000002" y="142.0" />
+      <point x="37.743750000000034" y="142.0" />
+      <point x="-56.625" y="58.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.Kinobuchungssystem" target="ch.oconnor.backend.Vorstellung">
+      <point x="-52.0" y="-48.0" />
+      <point x="603.0" y="542.0" />
+      <point x="464.85625000000005" y="542.0" />
+      <point x="69.75" y="70.0" />
+    </edge>
+    <edge source="ch.oconnor.backend.Vorstellung" target="ch.oconnor.backend.Platzreservierung">
+      <point x="-46.5" y="-70.0" />
+      <point x="348.60625000000005" y="282.0" />
+      <point x="198.91250000000002" y="282.0" />
+      <point x="59.25" y="25.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.Platzreservierung" target="ch.oconnor.backend.Platz">
+      <point x="39.5" y="-25.5" />
+      <point x="179.16250000000002" y="142.0" />
+      <point x="150.99375000000003" y="142.0" />
+      <point x="56.625" y="58.5" />
+    </edge>
+    <edge source="ch.oconnor.backend.DB" target="ch.oconnor.backend.Vorstellung">
+      <point x="75.75" y="-136.5" />
+      <point x="328.25" y="572.0" />
+      <point x="325.35625000000005" y="572.0" />
+      <point x="-69.75" y="70.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="451.5" y="416.0" />
+  <SelectedNodes>
+    <node>ch.oconnor.backend.Film</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

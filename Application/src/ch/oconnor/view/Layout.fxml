@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.oconnor.view.Controller">
    <left>
@@ -14,15 +17,35 @@
                   <Insets left="50.0" />
                </VBox.margin>
             </JFXDatePicker>
-            <VBox fx:id="movieContainer" prefHeight="550.0">
+            <ScrollPane prefHeight="610.0" prefWidth="400.0" style="-fx-control-inner-background: grey; -fx-background-color: transparent;">
+               <content>
+                  <VBox fx:id="movieContainer" prefHeight="550.0" prefWidth="390.0" style="-fx-background-color: transparent;" />
+               </content>
                <VBox.margin>
-                  <Insets left="25.0" right="25.0" top="50.0" />
+                  <Insets top="35.0" />
                </VBox.margin>
-            </VBox>
+            </ScrollPane>
          </children>
          <padding>
             <Insets top="50.0" />
          </padding>
       </VBox>
    </left>
+   <padding>
+      <Insets left="5.0" right="5.0" />
+   </padding>
+   <center>
+      <VBox fx:id="saalSitz" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton disable="true" prefWidth="800.0" style="-fx-background-color: green;" text="SCREEN" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="70.0" right="70.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>

@@ -4,26 +4,18 @@ import java.time.LocalDateTime;
 
 public class Vorstellung {
 
+	private int ID;
 	private Kinosaal kinosaal;
 	private Film film;
-	private Platzreservierung platzres;
 	private LocalDateTime zeit;
+	private Platzreservierung platzres;
 
 
-	public Vorstellung(int vorstellungID, Film film, Kinosaal kinosaal, LocalDateTime zeit) {
-
-		this.platzres = new Platzreservierung(vorstellungID);
-
+	public Vorstellung(int ID, Kinosaal kinosaal, Film film, LocalDateTime zeit) {
+		this.ID = ID;
+		this.kinosaal = kinosaal;
 		this.film     = film;
-		this.kinosaal = kinosaal;
 		this.zeit     = zeit;
-
-	}
-
-	public Vorstellung(Kinosaal kinosaal, Film film, LocalDateTime zeit) {
-		this.kinosaal = kinosaal;
-		this.film = film;
-		this.zeit = zeit;
 	}
 
 	public LocalDateTime getZeit() {
@@ -32,6 +24,18 @@ public class Vorstellung {
 
 	public Film getFilm() {
 		return film;
+	}
+
+	public Platzreservierung getPlatzres() {
+		return platzres;
+	}
+
+	public void setPlatzres(Platzreservierung platzres) {
+		this.platzres = platzres;
+	}
+
+	public int getID() {
+		return this.ID;
 	}
 
 }

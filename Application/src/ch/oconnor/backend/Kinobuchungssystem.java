@@ -22,8 +22,17 @@ public class Kinobuchungssystem {
 
 		vorstellungList = Main.db.getAllVorstellungen(filmMap, kinosaalMap);
 
+		for(Vorstellung v : vorstellungList) {
+			System.out.println(v.getFilm().getName() + " -> " + v.getZeit());
+		}
+
 
 	}
+
+	public Map<String, Film> getFilmMap() {
+		return filmMap;
+	}
+
 
 	public List<Vorstellung> getVorstellungList() {
 		return vorstellungList;
