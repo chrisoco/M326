@@ -10,9 +10,11 @@ public class Film {
 
 
 	public Film(String name, String desc, Image img) {
+
 		this.name = name;
 		this.desc = desc;
-		this.img = img;
+		this.img  = img;
+
 	}
 
 	public String getName() {

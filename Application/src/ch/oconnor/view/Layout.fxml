@@ -2,9 +2,15 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -12,7 +18,7 @@
    <left>
       <VBox prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXDatePicker fx:id="dateField" prefWidth="300.0">
+            <JFXDatePicker fx:id="dateField" onAction="#initFilm" prefWidth="300.0">
                <VBox.margin>
                   <Insets left="50.0" />
                </VBox.margin>
@@ -35,17 +41,87 @@
       <Insets left="5.0" right="5.0" />
    </padding>
    <center>
-      <VBox fx:id="saalSitz" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="dialogPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton disable="true" prefWidth="800.0" style="-fx-background-color: green;" text="SCREEN" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets left="70.0" right="70.0" top="20.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <GridPane hgap="10.0" prefHeight="200.0" vgap="10.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXButton fx:id="resButton" buttonType="RAISED" disable="true" onAction="#placeBooking" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #42f4bf;" text="Reservieren" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="110.0" right="110.0" />
+                           </GridPane.margin>
+                        </JFXButton>
+                        <Label fx:id="selMovieLabel" alignment="CENTER" contentDisplay="CENTER" GridPane.columnSpan="2">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="Century" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="selSaalLabel" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="userPhoneField" labelFloat="true" onKeyReleased="#phoneValidator" promptText="Phone Number" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="selSeat" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <JFXButton fx:id="showRes" buttonType="RAISED" disable="true" onAction="#showRes" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #42f4bf;" text="Reservationen" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <GridPane.margin>
+                              <Insets left="100.0" right="100.0" />
+                           </GridPane.margin>
+                        </JFXButton>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="50.0" left="90.0" right="90.0" />
+                     </BorderPane.margin>
+                  </GridPane>
+               </bottom>
+               <center>
+                  <VBox fx:id="saalSitz" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton disable="true" prefWidth="800.0" style="-fx-background-color: green;" text="SCREEN" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets left="70.0" right="70.0" top="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
          </children>
-      </VBox>
+      </StackPane>
    </center>
 </BorderPane>

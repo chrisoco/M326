@@ -1,6 +1,7 @@
 package ch.oconnor.backend;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Vorstellung {
 
@@ -36,6 +37,27 @@ public class Vorstellung {
 
 	public int getID() {
 		return this.ID;
+	}
+
+	public String getVorstellungInfo() {
+		return String.format("%s\t\t%s\t\t%s",
+				this.film.getName(),
+				zeit.format(DateTimeFormatter.ofPattern("EEEE, dd.MMMM - HH:mm")),
+				this.kinosaal.getSaalName());
+	}
+
+	public String getTimeLoc() {
+		return String.format("%s : %s",
+				zeit.format(DateTimeFormatter.ofPattern("EEEE, dd.MMMM - HH:mm")),
+				this.kinosaal.getSaalName());
+	}
+
+	public Kinosaal getKinosaal() {
+		return kinosaal;
+	}
+
+	public String disDateTime() {
+		return "";
 	}
 
 }

@@ -43,4 +43,12 @@ public class Platz {
 		return besucherTel;
 	}
 
+	public String getResInfo() {
+		return String.format("R: %s\t| P: %3d\t%s\t", this.reihe, this.num, this.besucherTel);
+	}
+
+	public void setBesucherTel(String besucherTel) {
+		this.besucherTel = besucherTel;
+	}
+
 }

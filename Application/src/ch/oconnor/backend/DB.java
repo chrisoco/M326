@@ -76,6 +76,43 @@ public class DB {
 	}
 
 
+	public Map<String, Film> getCurrFilms(Map<String, Film> filmMap, String date) {
+
+		Map<String, Film> reMap = new TreeMap<>();
+
+		try {
+
+			rs = st.executeQuery("SELECT f.`name` FROM tbl_vorstellung"
+									+ " LEFT JOIN tbl_film as f"
+									+ " ON tbl_Film_FK = f.tbl_Film_ID"
+									+ " WHERE DATE(`zeitpunkt`) = '" + date + "'"
+									+ " GROUP BY `name`;");
+
+
+			while (rs.next()) {
+
+				String name = rs.getString(1);
+
+				reMap.put(name, filmMap.get(name));
+
+			}
+
+
+
+		} catch (SQLException e) {}
+
+
+		if(reMap.isEmpty()) reMap.put(
+				"Empty", new Film("No Movies Today ",
+							"\nWe Need a Break too! :)\n",
+							null)
+		);
+
+
+		return reMap;
+	}
+
+
 
 	public Map<String, Kinosaal> getAllKinosaal() {
 
@@ -171,6 +208,38 @@ public class DB {
 
 	}
 
+
+	public void resSeat(Platz p, String num) {
+
+
+		try {
+
+			st.executeUpdate(
+
+					"UPDATE `tbl_platz` SET `BesucherTel` = '" + num
+						+ "' WHERE (`tbl_Vorstellung_tbl_FK` = '" + p.getVorstellungID() + "') " +
+							"and (`Num` = '" + p.getNum() + "') and (`Reihe` = '" + p.getReihe() + "');");
+
+		} catch (SQLException e) {}
+
+	}
+
+
+	public void remBooking(Platz p) {
+
+
+		try {
+
+			st.executeUpdate("UPDATE `tbl_platz` SET `BesucherTel` = NULL"
+								+ " WHERE (`tbl_Vorstellung_tbl_FK` = '" + p.getVorstellungID() + "') and"
+								+ "(`Num` = '" + p.getNum() + "') and (`Reihe` = '" + p.getReihe() + "');");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+	}
 
 
 }
