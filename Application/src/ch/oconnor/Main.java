@@ -37,6 +37,7 @@ public class Main extends Application {
 			loader.setLocation(Main.class.getResource("view/Layout.fxml"));
 			rootPane = (BorderPane) loader.load();
 
+			primaryStage.centerOnScreen();
 			primaryStage.setScene(new Scene(rootPane));
 			primaryStage.setResizable(false);
 			primaryStage.show();

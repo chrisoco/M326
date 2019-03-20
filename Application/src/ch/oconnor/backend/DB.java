@@ -83,8 +83,8 @@ public class DB {
 		try {
 
 			rs = st.executeQuery("SELECT f.`name` FROM tbl_vorstellung"
-									+ " LEFT JOIN tbl_film as f"
-									+ " ON tbl_Film_FK = f.tbl_Film_ID"
+					+ " LEFT JOIN tbl_film as f"
+					+ " ON tbl_Film_FK = f.tbl_Film_ID"
 									+ " WHERE DATE(`zeitpunkt`) = '" + date + "'"
 									+ " GROUP BY `name`;");
 
@@ -161,7 +161,6 @@ public class DB {
 						filmMap.get(rs.getString(2)),
 						parseDate(rs.getString(4))
 				));
-
 
 			}
 

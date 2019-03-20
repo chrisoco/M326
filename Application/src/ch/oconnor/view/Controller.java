@@ -28,16 +28,12 @@ public class Controller {
 
 	@FXML
 	private JFXDatePicker dateField;
-
 	@FXML
 	private VBox movieContainer;
-
 	@FXML
 	private VBox saalSitz;
-
 	@FXML
 	private JFXTextField userPhoneField;
-
 	@FXML
 	private Label selMovieLabel;
 	@FXML
@@ -50,7 +46,6 @@ public class Controller {
 	private JFXButton showRes;
 	@FXML
 	private StackPane dialogPane;
-
 
 
 	private GridPane seatGrid;
@@ -162,7 +157,7 @@ public class Controller {
 		selMovieLabel.setText(currVorstellung.getFilm().getName());
 		selSaalLabel.setText(currVorstellung.getTimeLoc());
 		selSeat.setText("");
-		showRes.setDisable(false);
+		showRes.setVisible(true);
 
 		for(Platz p : currVorstellung.getPlatzres().getPlatzList()) {
 
@@ -194,6 +189,7 @@ public class Controller {
 		}
 
 
+		resList.clear();
 		userPhoneField.clear();
 		resButton.setDisable(true);
 		showVorstellung();
@@ -309,6 +305,8 @@ public class Controller {
 		apply.setPadding(new Insets(10,10,10,10));
 
 		apply.setOnAction(e -> {
+
+			resList.clear();
 
 			if(remList.isEmpty()) {
 				jfxDialog.close();

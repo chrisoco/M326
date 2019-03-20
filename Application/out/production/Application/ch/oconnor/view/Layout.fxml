@@ -45,12 +45,14 @@
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <bottom>
-                  <GridPane hgap="10.0" prefHeight="200.0" vgap="10.0" BorderPane.alignment="CENTER">
+                  <GridPane hgap="10.0" prefHeight="280.0" vgap="10.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -58,12 +60,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXButton fx:id="resButton" buttonType="RAISED" disable="true" onAction="#placeBooking" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #42f4bf;" text="Reservieren" GridPane.rowIndex="3">
+                        <JFXButton fx:id="resButton" buttonType="RAISED" disable="true" onAction="#placeBooking" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #42f4bf;" text="Reservieren" GridPane.rowIndex="6">
                            <GridPane.margin>
                               <Insets left="110.0" right="110.0" />
                            </GridPane.margin>
                         </JFXButton>
-                        <Label fx:id="selMovieLabel" alignment="CENTER" contentDisplay="CENTER" GridPane.columnSpan="2">
+                        <Label fx:id="selMovieLabel" alignment="CENTER" contentDisplay="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="20.0" />
                            </GridPane.margin>
@@ -71,7 +73,7 @@
                               <Font name="Century" size="22.0" />
                            </font>
                         </Label>
-                        <Label fx:id="selSaalLabel" GridPane.columnIndex="1">
+                        <Label fx:id="selSaalLabel" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="20.0" />
                            </GridPane.margin>
@@ -79,15 +81,18 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="userPhoneField" labelFloat="true" onKeyReleased="#phoneValidator" promptText="Phone Number" GridPane.rowIndex="2">
+                        <JFXTextField fx:id="userPhoneField" labelFloat="true" onKeyReleased="#phoneValidator" promptText="Phone Number" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
                         </JFXTextField>
-                        <Label fx:id="selSeat" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="selSeat" wrapText="true" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -95,7 +100,7 @@
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <JFXButton fx:id="showRes" buttonType="RAISED" disable="true" onAction="#showRes" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #42f4bf;" text="Reservationen" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <JFXButton fx:id="showRes" buttonType="RAISED" onAction="#showRes" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #42f4bf;" text="Reservationen" visible="false" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets left="100.0" right="100.0" />
                            </GridPane.margin>
@@ -109,7 +114,7 @@
                <center>
                   <VBox fx:id="saalSitz" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton disable="true" prefWidth="800.0" style="-fx-background-color: green;" text="SCREEN" textAlignment="CENTER">
+                        <JFXButton prefWidth="800.0" style="-fx-background-color: #0ebee2;" text="Leinwand" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets left="70.0" right="70.0" top="20.0" />
                            </VBox.margin>
