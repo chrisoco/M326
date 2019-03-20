@@ -184,16 +184,16 @@ public class Controller {
 	private void placeBooking() {
 
 		for (Platz p : resList) {
-			Main.db.resSeat(p, getPhoneNumFormatted());
+			Main.db.resSeat(p, getPhoneNumFormatted(), currVorstellung.getID());
 			p.setBesucherTel(getPhoneNumFormatted());
 		}
 
 
-		resList.clear();
 		userPhoneField.clear();
 		resButton.setDisable(true);
 		showVorstellung();
 		orderComplete();
+		resList.clear();
 
 	}
 
@@ -315,7 +315,7 @@ public class Controller {
 
 			for (Platz p : remList) {
 				p.setBesucherTel(null);
-				Main.db.remBooking(p);
+				Main.db.remBooking(p, currVorstellung.getID());
 			}
 
 			showVorstellung();

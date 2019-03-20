@@ -35,8 +35,12 @@ public class Vorstellung {
 		this.platzres = platzres;
 	}
 
+	public int getSaalID() {
+		return this.kinosaal.getID();
+	}
+
 	public int getID() {
-		return this.ID;
+		return ID;
 	}
 
 	public String getVorstellungInfo() {

@@ -2,25 +2,30 @@ package ch.oconnor.backend;
 
 public class Platz {
 
-	private int vorstellungID, num;
+	private int SaalID, ID, num;
 	private String reihe;
 	private String besucherTel;
 
-	public Platz(int vorstellungID, String reihe, int num, String besucherTel) {
+	public Platz(int ID, int SaalID, String reihe, int num) {
 
-		this.vorstellungID = vorstellungID;
+		this.ID = ID;
+		this.SaalID = SaalID;
 		this.reihe = reihe;
 		this.num = num;
 		this.besucherTel = besucherTel;
 
 	}
 
-	public int getVorstellungID() {
-		return vorstellungID;
+	public int getID() {
+		return ID;
 	}
 
-	public void setVorstellungID(int vorstellungID) {
-		this.vorstellungID = vorstellungID;
+	public int getSaalID() {
+		return SaalID;
+	}
+
+	public void setSaalID(int saalID) {
+		SaalID = saalID;
 	}
 
 	public String getReihe() {

@@ -120,11 +120,11 @@ public class DB {
 
 		try {
 
-			rs = st.executeQuery("SELECT `saalName` FROM tbl_kinosaal;");
+			rs = st.executeQuery("SELECT * FROM tbl_kinosaal;");
 
 			while(rs.next()) {
 
-				result.put(rs.getString(1), new Kinosaal(rs.getString(1)));
+				result.put(rs.getString(2), new Kinosaal(rs.getInt(1), rs.getString(2)));
 
 			}
 
@@ -165,7 +165,12 @@ public class DB {
 			}
 
 			for (Vorstellung v : result) {
-				v.setPlatzres(getPlatzRes(v.getID())); // SET ID AS ATTRIBUTE OF KLASS ...
+				LinkedList<Platz> resP = getPlatzRes(v.getSaalID());
+//				v.setPlatzres(); // SET ID AS ATTRIBUTE OF KLASS ...
+				for(Platz p : resP) {
+					p.setBesucherTel(getResPlatzPhone(v.getID(), p.getID()));
+				}
+				v.setPlatzres(new Platzreservierung(resP));
 			}
 
 
@@ -182,56 +187,77 @@ public class DB {
 
 
 
-	public Platzreservierung getPlatzRes(int vorstellungID) {
+	public LinkedList<Platz> getPlatzRes(int SaalID) {
 
 		LinkedList<Platz> result = new LinkedList<>();
 
 		try {
 
-			rs = st.executeQuery("SELECT `Reihe`, `Num`, `BesucherTel` FROM tbl_platz"
-										+ " WHERE tbl_Vorstellung_tbl_FK = " + vorstellungID
+			rs = st.executeQuery("SELECT `tbl_Platz_ID`, `Reihe`, `Num` FROM tbl_platz"
+										+ " WHERE tbl_Kinosaal_FK = " + SaalID
 											+ " ORDER BY Reihe, Num;"
 								);
 
 			while(rs.next()) {
 
-				result.add(new Platz(vorstellungID, rs.getString(1), rs.getInt(2), rs.getString(3)));
+				result.add(new Platz(rs.getInt(1), SaalID, rs.getString(2), rs.getInt(3)));
 
 			}
 
-			return new Platzreservierung(result);
+			return result;
 
 		} catch (SQLException e) {}
 
-		return new Platzreservierung(null);
+		return result;
 
 	}
 
 
-	public void resSeat(Platz p, String num) {
-
+	private String getResPlatzPhone(int v_ID, int p_ID) {
 
 		try {
 
-			st.executeUpdate(
+			rs = st.executeQuery("SELECT Tel FROM tbl_reservation"
+									+ " LEFT JOIN tbl_Platz AS p"
+									+ " ON p.tbl_Platz_ID = tbl_Platz_FK"
+									+ " WHERE tbl_vorstellung_FK = '" + v_ID + "'"
+									+ " AND p.tbl_Platz_ID = '" + p_ID + "';");
 
-					"UPDATE `tbl_platz` SET `BesucherTel` = '" + num
-						+ "' WHERE (`tbl_Vorstellung_tbl_FK` = '" + p.getVorstellungID() + "') " +
-							"and (`Num` = '" + p.getNum() + "') and (`Reihe` = '" + p.getReihe() + "');");
+			if(rs.next()) return rs.getString(1);
 
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 
 	}
 
 
-	public void remBooking(Platz p) {
+	public void resSeat(Platz p, String telNum, int v_ID) {
 
 
 		try {
 
-			st.executeUpdate("UPDATE `tbl_platz` SET `BesucherTel` = NULL"
-								+ " WHERE (`tbl_Vorstellung_tbl_FK` = '" + p.getVorstellungID() + "') and"
-								+ "(`Num` = '" + p.getNum() + "') and (`Reihe` = '" + p.getReihe() + "');");
+			st.executeUpdate("INSERT INTO tbl_reservation"
+								+ " (`tbl_Vorstellung_FK`, `tbl_Platz_FK`, `Tel`)"
+								+ " VALUE ('" + v_ID + "', '" + p.getID() + "', '" + telNum + "');");
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+
+	}
+
+
+	public void remBooking(Platz p, int v_ID) {
+
+
+		try {
+
+			st.executeUpdate("DELETE FROM tbl_reservation"
+								+ " WHERE tbl_Vorstellung_FK = '" + v_ID + "'"
+								+ " AND tbl_Platz_FK = '" + p.getID() + "'");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
