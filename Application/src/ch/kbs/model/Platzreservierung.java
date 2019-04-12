@@ -1,4 +1,18 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.kbs.model;
+
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ *
+ */
+
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,6 +22,9 @@ public class Platzreservierung {
 
 	private List<Platz> platzList;
 
+	/**
+	 * Constructs a new {@link Platzreservierung}.
+	 */
 	public Platzreservierung(List<Platz> platzList) {
 		this.platzList = platzList;
 	}

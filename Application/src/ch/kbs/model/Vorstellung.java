@@ -1,4 +1,18 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.kbs.model;
+
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ *
+ */
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +25,14 @@ public class Vorstellung {
 	private LocalDateTime zeit;
 	private Platzreservierung platzres;
 
-
+	/**
+	 * Constructs a new {@link Vorstellung}.
+	 *
+	 * @param ID
+	 * @param kinosaal
+	 * @param film
+	 * @param zeit
+	 */
 	public Vorstellung(int ID, Kinosaal kinosaal, Film film, LocalDateTime zeit) {
 		this.ID       = ID;
 		this.kinosaal = kinosaal;

@@ -1,4 +1,17 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.kbs.model;
+
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ *
+ */
 
 
 import ch.kbs.Main;
@@ -15,7 +28,9 @@ public class Kinobuchungssystem {
 	private Map<String, Kinosaal> kinosaalMap;
 	private List<Vorstellung>     vorstellungList;
 
-
+	/**
+	 * Constructs a new {@link Kinobuchungssystem} & Loads all Data from {@link DB} into Maps.
+	 */
 	public Kinobuchungssystem() {
 
 		filmMap         = Main.db.getAllFilms();

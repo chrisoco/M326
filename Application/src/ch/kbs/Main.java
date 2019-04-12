@@ -1,5 +1,21 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.kbs;
 
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ *
+ * Main Klass
+ *
+ * Initializes FXML - GUI and starts the Application.
+ *
+ */
 
 import ch.kbs.model.DB;
 import javafx.application.Application;
@@ -27,7 +43,9 @@ public class Main extends Application {
 
 	}
 
-
+	/**
+	 * Initialize FXML File and start Application.
+	 */
 	private void initFXML() {
 
 		try {

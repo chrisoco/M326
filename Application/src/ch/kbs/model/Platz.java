@@ -1,4 +1,18 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.kbs.model;
+
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ *
+ */
+
 
 public class Platz {
 
@@ -6,6 +20,9 @@ public class Platz {
 	private String reihe, besucherTel;
 
 
+	/**
+	 * Constructs a new {@link Platz}.
+	 */
 	public Platz(int ID, int SaalID, String reihe, int num) {
 
 		this.ID          = ID;

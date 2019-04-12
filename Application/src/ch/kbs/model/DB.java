@@ -1,4 +1,18 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.kbs.model;
+
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ *
+ */
+
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -26,7 +40,7 @@ public class DB {
 
 
 	/**
-	 * Custom constructor Instantiates the DB Class.
+	 * Constructs a new DB-Connection {@link DB}.
 	 */
 	public DB() {
 		try {

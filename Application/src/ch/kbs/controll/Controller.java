@@ -1,4 +1,22 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.kbs.controll;
+
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ *
+ * Controller Class
+ *
+ * Controls of the GUI
+ * (Data Handling, Display and User interaction)
+ *
+ */
 
 import ch.kbs.*;
 import ch.kbs.model.Film;
@@ -57,10 +75,24 @@ public class Controller {
 	private static List<Platz> remList;
 
 
+	/**
+	 * On startup Method to preset Data.
+	 *
+	 * creates new:
+	 * {@link Kinobuchungssystem}
+	 * {@link #resList}
+	 * {@link #remList}
+	 *
+	 * Set default Date value to 2019/03/01
+	 *
+	 * Initialize:
+	 * {@link #initSaal()}
+	 * {@link #initFilm()}
+	 */
 	@FXML
 	public void initialize() {
 
-		KBS = new Kinobuchungssystem();
+		KBS     = new Kinobuchungssystem();
 		resList = new ArrayList<>();
 		remList = new ArrayList<>();
 
@@ -71,7 +103,16 @@ public class Controller {
 
 	}
 
-
+	/**
+	 * Get all Films of current selected Date from {@link #dateField}.
+	 *
+	 * Add all Films to GUI in a Gridpane with:
+	 * Image {@link Film#getImg()}
+	 * Name {@link Film#getName()}
+	 * Desc {@link Film#getDesc()}
+	 *
+	 * Add List to each Film containing Time the Movie Runs at {@link #getFilmTimes(Film)}.
+	 */
 	public void initFilm(){
 
 		movieContainer.getChildren().clear();
@@ -105,7 +146,9 @@ public class Controller {
 
 	}
 
-
+	/**
+	 * Initialize / Reset to default - Saal + Display to GUI (empty).
+	 */
 	private void initSaal() {
 
 		seatGrid = new GridPane();
@@ -120,7 +163,13 @@ public class Controller {
 
 	}
 
-
+	/**
+	 * Create Visual Buttons of Time when a Film Runs and setOnAction to {@link #showVorstellung()}.
+	 * Button gets UserData value of Vorstellung it represents.
+	 *
+	 * @param film Film to get Runtimes from.
+	 * @return List with all the Times the {@param film} Runs at on selected Date{@link #dateField}.
+	 */
 	private HBox getFilmTimes(Film film) {
 
 		HBox timeBox = new HBox(5);
@@ -148,6 +197,14 @@ public class Controller {
 
 	}
 
+	/**
+	 * Display selected Vorstellung in GUI
+	 * Generate Vorstellung Room with Checkboxes representing Seats
+	 *
+	 * If a Seat is already Booked it will be Disabled and Selected Red
+	 * else it will be free to Book.
+	 *
+	 */
 	private void showVorstellung() {
 
 		seatGrid.getChildren().clear();
@@ -164,6 +221,13 @@ public class Controller {
 
 			if(p.getBesucherTel() != null) seatStatusBooked(seat);
 
+			/**
+			 * OnAction Event for a Seat
+			 * If a Seat gets Selected Add it to {@link #resList}
+			 * else remove it from {@link #resList}
+			 *
+			 * Update {@link selSeat} Label with Changes.
+			 */
 			seat.setOnAction( event -> {
 
 				if(seat.isSelected()) resList.add((Platz) seat.getUserData());
@@ -172,12 +236,25 @@ public class Controller {
 
 			});
 
+			/**
+			 * Add Seat to GridPane (X,Y)
+			 * X: Seat Number
+			 * Y: Letter of Row - 64 = Number (A = 1), (B = 2) ... (ASCII CODE)
+			 */
 			seatGrid.add(seat, p.getNum(), p.getReihe().charAt(0) - 64);
 
 		}
 
 	}
 
+	/**
+	 * Place Booking for all Selected Seats {@link Main#db#resSeat()}
+	 * Clear all User Entered Data {@link #userPhoneField}
+	 *
+	 * Display Success Message for User {@link #orderComplete()}
+	 *
+	 * Reload Selected Vorstellung {@link #showVorstellung()} with updated Data from {@link Main#db}
+	 */
 	@FXML
 	private void placeBooking() {
 
@@ -196,6 +273,9 @@ public class Controller {
 
 	}
 
+	/**
+	 * Format Entered PhoneNumber to match example: "076 123 45 67".
+	 */
 	private String getPhoneNumFormatted() {
 
 		StringBuilder raw = new StringBuilder(userPhoneField.getText().replaceAll("\\s|[-]", ""));
@@ -208,6 +288,10 @@ public class Controller {
 		return raw.toString();
 	}
 
+	/**
+	 * If a Seat is Booked change its Properties to Selected + Disabled + Color = Red + Add Tooltip with PhoneNumber of BookingHolder.
+	 * @param cb Checkbox Representing a single Seat
+	 */
 	private void seatStatusBooked(JFXCheckBox cb) {
 
 		cb.setSelected(true);
@@ -216,9 +300,12 @@ public class Controller {
 		cb.setCheckedColor(Paint.valueOf("#b71010"));
 		cb.setTooltip(new Tooltip(((Platz) cb.getUserData()).getBesucherTel()));
 
-
 	}
 
+	/**
+	 * @return String of all Selected Seats example: "[A1] [B3] [H4]
+	 * if none are Selected return empty String.
+	 */
 	private String selectedPlaetze() {
 
 		if (resList.isEmpty()) return "";
@@ -232,17 +319,32 @@ public class Controller {
 		return s;
 	}
 
-
+	/**
+	 * Validate if a PhoneNumber entered by the User {@link #userPhoneField} is Valid or not.
+	 * Valid Numbers are: (-)07\\d{8}
+	 *
+	 * Disable / Enable {@link #resButton} if Valid / not Valid
+	 */
 	@FXML
 	private void phoneValidator() {
 
-		String input = userPhoneField.getText().replaceAll("\\s|[-]", "");
+		String input = userPhoneField.getText().replaceAll("\\s|[-]", "0");
 
 		if(!resList.isEmpty()) resButton.setDisable(!input.matches("07\\d{8}"));
 		else resButton.setDisable(true);
 
 	}
 
+	/**
+	 * Popup Dialog to show all Reservations of the Selected Vorstellung.
+	 *
+	 * Dialog contains List of all Booked Seats with following Information:
+	 * {@link Platz#getReihe()} {@link Platz#getNum()} {@link Platz#getBesucherTel()}
+	 *
+	 * User is able to Select Bookings which he would like to cancel.
+	 *
+	 * Remove all Bookings from the Selected Seats.
+	 */
 	@FXML
 	private void showRes() {
 
@@ -267,6 +369,10 @@ public class Controller {
 			btn.setButtonType(JFXButton.ButtonType.RAISED);
 			btn.setStyle("-fx-background-color: #bf3f3f");
 
+			/**
+			 * Change the status of a shown Seat from Delete to Cancel
+			 * Add / Remove Seat from {@link #remList}
+			 */
 			btn.setOnAction(e -> {
 
 				if(btn.getText().equals("Delete")) {
@@ -310,6 +416,9 @@ public class Controller {
 				return;
 			}
 
+			/**
+			 * Remove Bookings of all Selected Seats.
+			 */
 			for (Platz p : remList) {
 				p.setBesucherTel(null);
 				Main.db.remBooking(p, currVorstellung.getID());
@@ -320,7 +429,9 @@ public class Controller {
 
 		});
 
-
+		/**
+		 *  Dispatch all Changes.
+		 */
 		JFXButton cancel = new JFXButton(" CANCEL ");
 		cancel.setButtonType(JFXButton.ButtonType.RAISED);
 		cancel.setStyle("-fx-background-color: #ff9f54");
@@ -333,6 +444,9 @@ public class Controller {
 
 	}
 
+	/**
+	 * Show Dialog for User to Confirm Order was Accepted.
+	 */
 	private void orderComplete() {
 
 		JFXDialogLayout content = new JFXDialogLayout();
