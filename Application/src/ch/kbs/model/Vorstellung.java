@@ -1,4 +1,4 @@
-package ch.oconnor.backend;
+package ch.kbs.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ public class Vorstellung {
 
 
 	public Vorstellung(int ID, Kinosaal kinosaal, Film film, LocalDateTime zeit) {
-		this.ID = ID;
+		this.ID       = ID;
 		this.kinosaal = kinosaal;
 		this.film     = film;
 		this.zeit     = zeit;
@@ -54,14 +54,6 @@ public class Vorstellung {
 		return String.format("%s : %s",
 				zeit.format(DateTimeFormatter.ofPattern("EEEE, dd.MMMM - HH:mm")),
 				this.kinosaal.getSaalName());
-	}
-
-	public Kinosaal getKinosaal() {
-		return kinosaal;
-	}
-
-	public String disDateTime() {
-		return "";
 	}
 
 }

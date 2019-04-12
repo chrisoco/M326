@@ -1,4 +1,4 @@
-package ch.oconnor.backend;
+package ch.kbs.model;
 
 import javafx.scene.image.Image;
 
@@ -6,14 +6,14 @@ public class Film {
 
 	private String name;
 	private String desc;
-	private Image img;
+	private Image  img ;
 
 
 	public Film(String name, String desc, Image img) {
 
 		this.name = name;
 		this.desc = desc;
-		this.img  = img;
+		this.img  = img ;
 
 	}
 
@@ -25,7 +25,7 @@ public class Film {
 		return desc;
 	}
 
-	public Image getImg() {
+	public Image   getImg() {
 		return img;
 	}
 

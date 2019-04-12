@@ -1,4 +1,4 @@
-package ch.oconnor.backend;
+package ch.kbs.model;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -57,7 +57,7 @@ public class DB {
 
 			}
 
-		} catch (Exception e) {}
+		} catch (Exception e) { e.printStackTrace(); }
 
 		return result;
 	}
@@ -69,7 +69,7 @@ public class DB {
 
 			return SwingFXUtils.toFXImage(ImageIO.read(is), null);
 
-		} catch (Exception e) {}
+		} catch (Exception e) { e.printStackTrace(); }
 
 		return null;
 
@@ -99,7 +99,7 @@ public class DB {
 
 
 
-		} catch (SQLException e) {}
+		} catch (SQLException e) { e.printStackTrace(); }
 
 
 		if(reMap.isEmpty()) reMap.put(
@@ -128,7 +128,7 @@ public class DB {
 
 			}
 
-		} catch (SQLException e) {}
+		} catch (SQLException e) { e.printStackTrace(); }
 
 		return result;
 
@@ -138,7 +138,6 @@ public class DB {
 	public List<Vorstellung> getAllVorstellungen(Map<String, Film> filmMap, Map<String, Kinosaal> kinosaalMap) {
 
 		ArrayList<Vorstellung> result = new ArrayList<>();
-
 
 		try {
 
@@ -166,15 +165,13 @@ public class DB {
 
 			for (Vorstellung v : result) {
 				LinkedList<Platz> resP = getPlatzRes(v.getSaalID());
-//				v.setPlatzres(); // SET ID AS ATTRIBUTE OF KLASS ...
 				for(Platz p : resP) {
 					p.setBesucherTel(getResPlatzPhone(v.getID(), p.getID()));
 				}
 				v.setPlatzres(new Platzreservierung(resP));
 			}
 
-
-		} catch (SQLException e) {}
+		} catch (SQLException e) { e.printStackTrace(); }
 
 		return result;
 
@@ -206,7 +203,7 @@ public class DB {
 
 			return result;
 
-		} catch (SQLException e) {}
+		} catch (SQLException e) { e.printStackTrace(); }
 
 		return result;
 
@@ -225,9 +222,7 @@ public class DB {
 
 			if(rs.next()) return rs.getString(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} catch (SQLException e) { e.printStackTrace(); }
 
 		return null;
 
@@ -236,22 +231,18 @@ public class DB {
 
 	public void resSeat(Platz p, String telNum, int v_ID) {
 
-
 		try {
 
 			st.executeUpdate("INSERT INTO tbl_reservation"
 								+ " (`tbl_Vorstellung_FK`, `tbl_Platz_FK`, `Tel`)"
 								+ " VALUE ('" + v_ID + "', '" + p.getID() + "', '" + telNum + "');");
 
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
+		} catch (SQLException e) {}
 
 	}
 
 
 	public void remBooking(Platz p, int v_ID) {
-
 
 		try {
 
@@ -259,10 +250,7 @@ public class DB {
 								+ " WHERE tbl_Vorstellung_FK = '" + v_ID + "'"
 								+ " AND tbl_Platz_FK = '" + p.getID() + "'");
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		} catch (SQLException e) { e.printStackTrace(); }
 
 	}
 

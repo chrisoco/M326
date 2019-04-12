@@ -1,4 +1,4 @@
-package ch.oconnor.backend;
+package ch.kbs.model;
 
 import java.util.ArrayList;
 import java.util.Comparator;

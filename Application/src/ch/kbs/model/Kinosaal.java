@@ -1,12 +1,12 @@
-package ch.oconnor.backend;
+package ch.kbs.model;
 
 public class Kinosaal {
 
-	private int ID;
+	private int    ID;
 	private String saalName;
 
 	public Kinosaal(int ID, String saalName) {
-		this.ID = ID;
+		this.ID       = ID;
 		this.saalName = saalName;
 	}
 

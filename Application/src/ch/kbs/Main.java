@@ -1,7 +1,7 @@
-package ch.oconnor;
+package ch.kbs;
 
 
-import ch.oconnor.backend.DB;
+import ch.kbs.model.DB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,7 +22,6 @@ public class Main extends Application {
 
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("M326 Kinobuchungssystem");
-
 
 		initFXML();
 
@@ -45,8 +44,6 @@ public class Main extends Application {
 		} catch (Exception e) {}
 
 	}
-
-
 
 	public static void main(String[] args) {
 		launch(args);

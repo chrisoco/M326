@@ -1,17 +1,17 @@
-package ch.oconnor.backend;
+package ch.kbs.model;
 
 public class Platz {
 
 	private int SaalID, ID, num;
-	private String reihe;
-	private String besucherTel;
+	private String reihe, besucherTel;
+
 
 	public Platz(int ID, int SaalID, String reihe, int num) {
 
-		this.ID = ID;
-		this.SaalID = SaalID;
-		this.reihe = reihe;
-		this.num = num;
+		this.ID          = ID;
+		this.SaalID      = SaalID;
+		this.reihe       = reihe;
+		this.num         = num;
 		this.besucherTel = besucherTel;
 
 	}
@@ -20,28 +20,12 @@ public class Platz {
 		return ID;
 	}
 
-	public int getSaalID() {
-		return SaalID;
-	}
-
-	public void setSaalID(int saalID) {
-		SaalID = saalID;
-	}
-
 	public String getReihe() {
 		return reihe;
 	}
 
-	public void setReihe(String reihe) {
-		this.reihe = reihe;
-	}
-
 	public int getNum() {
 		return num;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
 	}
 
 	public String getBesucherTel() {

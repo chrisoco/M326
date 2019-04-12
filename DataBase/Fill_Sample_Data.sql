@@ -2,19 +2,19 @@ use m326;
 
 
 /* Movies */
-INSERT INTO `tbl_Film` (`name`, `desc`) VALUES 
+INSERT INTO `tbl_Film` (`name`, `desc`, `img`) VALUES 
 
     ("Alita Battle Angel", 
-    "Eine Cyborg-Frau erwacht in einer fremden Welt der Zukunft und wird von einem Wissenschaftler aufgenommen."),
+    "Eine Cyborg-Frau erwacht in einer fremden Welt der Zukunft und wird von einem Wissenschaftler aufgenommen.", load_file('')),
 
 	("Captain Marvel", 
-    "Lange vor den Avengers steigt Carol Danvers alias Captain Marvel in den 90ern zu einer bedeutenden Superheldin auf."),
+    "Lange vor den Avengers steigt Carol Danvers alias Captain Marvel in den 90ern zu einer bedeutenden Superheldin auf.", load_file('')),
     
     ("Chaos im Netz", 
-    "Ralph stürzt sich ins Internet, um nach einem wichtigen Ersatzteil zu suchen und begegnet dabei vielen schrägen Figuren."),
+    "Ralph stürzt sich ins Internet, um nach einem wichtigen Ersatzteil zu suchen und begegnet dabei vielen schrägen Figuren.", load_file('')),
     
     ("Hard Powder", 
-    "Nachdem sein Sohn von einem Drogenboss ermordet wird, begibt sich ein Schneepflugfahrer auf Rachefeldzug.");
+    "Nachdem sein Sohn von einem Drogenboss ermordet wird, begibt sich ein Schneepflugfahrer auf Rachefeldzug.", load_file(''));
     
     
 
@@ -27,6 +27,12 @@ INSERT INTO `tbl_Vorstellung` (`tbl_Film_FK`,`tbl_Kinosaal_FK`,`zeitpunkt`)
 				(1,1,"2019-03-01 18:15:00"), (2,2,"2019-03-01 18:15:00"), (3,3,"2019-03-01 18:15:00"),
 				(1,1,"2019-03-01 20:30:00"), (2,2,"2019-03-01 20:30:00"), (3,3,"2019-03-01 20:30:00"),
 				(4,1,"2019-03-01 12:45:00"), (4,1,"2019-03-01 14:30:00"), (4,1,"2019-03-01 22:00:00"), (4,1,"2019-03-01 23:45:00");
+                
+INSERT INTO `tbl_Vorstellung` (`tbl_Film_FK`,`tbl_Kinosaal_FK`,`zeitpunkt`) 
+	VALUES 		(1,1,"2019-03-03 16:00:00"), (2,2,"2019-03-03 16:00:00"),
+				(1,1,"2019-03-03 18:15:00"), (2,2,"2019-03-03 18:15:00"), 
+				(1,1,"2019-03-03 20:30:00"), (2,2,"2019-03-03 20:30:00"), 
+				(4,1,"2019-03-03 12:45:00"), (4,3,"2019-03-03 12:45:00"), (4,1,"2019-03-03 14:30:00"), (4,1,"2019-03-03 22:00:00"), (4,1,"2019-03-01 23:45:00");
 
 /* Sitzplätze */
 

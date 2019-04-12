@@ -1,10 +1,10 @@
-package ch.oconnor.view;
+package ch.kbs.controll;
 
-import ch.oconnor.*;
-import ch.oconnor.backend.Film;
-import ch.oconnor.backend.Kinobuchungssystem;
-import ch.oconnor.backend.Platz;
-import ch.oconnor.backend.Vorstellung;
+import ch.kbs.*;
+import ch.kbs.model.Film;
+import ch.kbs.model.Kinobuchungssystem;
+import ch.kbs.model.Platz;
+import ch.kbs.model.Vorstellung;
 import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -69,7 +69,6 @@ public class Controller {
 		initSaal();
 		initFilm();
 
-
 	}
 
 
@@ -119,7 +118,6 @@ public class Controller {
 
 		saalSitz.getChildren().add(seatGrid);
 
-
 	}
 
 
@@ -155,7 +153,7 @@ public class Controller {
 		seatGrid.getChildren().clear();
 
 		selMovieLabel.setText(currVorstellung.getFilm().getName());
-		selSaalLabel.setText(currVorstellung.getTimeLoc());
+		selSaalLabel .setText(currVorstellung.getTimeLoc());
 		selSeat.setText("");
 		showRes.setVisible(true);
 
@@ -184,10 +182,11 @@ public class Controller {
 	private void placeBooking() {
 
 		for (Platz p : resList) {
-			Main.db.resSeat(p, getPhoneNumFormatted(), currVorstellung.getID());
-			p.setBesucherTel(getPhoneNumFormatted());
-		}
 
+			Main.db.resSeat (p, getPhoneNumFormatted(), currVorstellung.getID());
+			p.setBesucherTel(   getPhoneNumFormatted());
+
+		}
 
 		userPhoneField.clear();
 		resButton.setDisable(true);
@@ -201,8 +200,8 @@ public class Controller {
 
 		StringBuilder raw = new StringBuilder(userPhoneField.getText().replaceAll("\\s|[-]", ""));
 
-		raw.insert(3, " ");
-		raw.insert(7, " ");
+		raw.insert( 3, " ");
+		raw.insert( 7, " ");
 		raw.insert(10, " ");
 
 
@@ -212,10 +211,9 @@ public class Controller {
 	private void seatStatusBooked(JFXCheckBox cb) {
 
 		cb.setSelected(true);
-		cb.setDisable(true);
-		// TODO
+		cb. setDisable(true);
+		
 		cb.setCheckedColor(Paint.valueOf("#b71010"));
-
 		cb.setTooltip(new Tooltip(((Platz) cb.getUserData()).getBesucherTel()));
 
 
@@ -286,9 +284,8 @@ public class Controller {
 			});
 
 
-			seatRow.getChildren().add(text);
-			seatRow.getChildren().add(btn);
-
+			seatRow .getChildren().add(text   );
+			seatRow .getChildren().add(btn    );
 			resSeats.getChildren().add(seatRow);
 
 		}
@@ -328,12 +325,9 @@ public class Controller {
 		cancel.setButtonType(JFXButton.ButtonType.RAISED);
 		cancel.setStyle("-fx-background-color: #ff9f54");
 		cancel.setPadding(new Insets(10,10,10,10));
-
 		cancel.setOnAction(e -> jfxDialog.close());
 
-
 		content.setActions(apply, cancel);
-
 
 		jfxDialog.show();
 
