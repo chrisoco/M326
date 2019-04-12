@@ -18,3 +18,8 @@ Es soll ein lauffähiges, getestetes Programm mit einem ergonomisch gestalteten 
 ### RAHMENBEDINGUNGEN
 
 Die zugrundeliegende Architektur und deren Umsetzung mit Entwurfsmuster muss durch entsprechende UML-Diagramme dargestellt und beschrieben werden.
+
+### !https://www.codefactor.io/repository/github/chrisoco/m326/badge!:https://www.codefactor.io/repository/github/chrisoco/m326
+[![CodeFactor](https://www.codefactor.io/repository/github/chrisoco/m326/badge)](https://www.codefactor.io/repository/github/chrisoco/m326)
+
+<a href="https://www.codefactor.io/repository/github/chrisoco/m326"><img src="https://www.codefactor.io/repository/github/chrisoco/m326/badge" alt="CodeFactor" /></a>
