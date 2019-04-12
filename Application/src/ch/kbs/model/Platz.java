@@ -10,6 +10,14 @@ package ch.kbs.model;
  *
  * @author Christopher O'Connor
  * @date 10/05/2019
+ * @version 1.0
+ *
+ * Platz Class to Hold Values of a Seat
+ * ID          = ID of Seat in DB.
+ * SaalID      = In witch Saal the Seat is.
+ * reihe       = Row of the Seat (Char A-Z)
+ * num         = Number of the Seat in its row.
+ * besucherTel = TelNumber of the Booker
  *
  */
 

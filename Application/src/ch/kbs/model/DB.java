@@ -10,9 +10,11 @@ package ch.kbs.model;
  *
  * @author Christopher O'Connor
  * @date 10/05/2019
+ * @version 1.0
+ *
+ * DB Class : Connection + Prepared Statements.
  *
  */
-
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -51,7 +53,9 @@ public class DB {
 
 	}
 
-
+	/**
+	 * @return Map containing all Movies from the DB
+	 */
 	public Map<String, Film> getAllFilms() {
 
 		TreeMap<String, Film> result = new TreeMap<>();
@@ -77,6 +81,12 @@ public class DB {
 	}
 
 
+	/**
+	 * Convert InputStream from DB Blob to {@link Image}
+	 *
+	 * @param is InputStream
+	 * @return Image from the InputStream
+	 */
 	private Image getImg(InputStream is) {
 
 		try {
@@ -90,6 +100,13 @@ public class DB {
 	}
 
 
+	/**
+	 * Get all Movies from selected Date
+	 *
+	 * @param filmMap Map containing all Movies
+	 * @param date Selected Date to filter by
+	 * @return Map containing all Movies from selected Date.
+	 */
 	public Map<String, Film> getCurrFilms(Map<String, Film> filmMap, String date) {
 
 		Map<String, Film> reMap = new TreeMap<>();
@@ -127,7 +144,10 @@ public class DB {
 	}
 
 
-
+	/**
+	 * Get all Kinosaal from DB
+	 * @return Map of all Kinosaals
+	 */
 	public Map<String, Kinosaal> getAllKinosaal() {
 
 		Map<String, Kinosaal> result = new TreeMap<>();
@@ -149,6 +169,12 @@ public class DB {
 	}
 
 
+	/**
+	 * Get all Vorstellungen from DB.
+	 * @param filmMap Map with all Movies to make pointers.
+	 * @param kinosaalMap Map with all Saals to make pointers.
+	 * @return List containing all Vorstellungen with correct Pointers.
+	 */
 	public List<Vorstellung> getAllVorstellungen(Map<String, Film> filmMap, Map<String, Kinosaal> kinosaalMap) {
 
 		ArrayList<Vorstellung> result = new ArrayList<>();
@@ -177,6 +203,9 @@ public class DB {
 
 			}
 
+			/**
+			 * Add Booked PhoneNumber to the Current Iterating Seat. If no Number is returned the Seat is free.
+			 */
 			for (Vorstellung v : result) {
 				LinkedList<Platz> resP = getPlatzRes(v.getSaalID());
 				for(Platz p : resP) {
@@ -192,12 +221,21 @@ public class DB {
 	}
 
 
+	/**
+	 * Parse SQLDate to LocalDateTime
+	 * @param sqlDate SQLTime
+	 * @return LocalDateTime
+	 */
 	private LocalDateTime parseDate(String sqlDate) {
 		return LocalDateTime.parse(sqlDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}
 
 
-
+	/**
+	 * Get all Seats of a Saal
+	 * @param SaalID SaalID in DB
+	 * @return List containing all Seats.
+	 */
 	public LinkedList<Platz> getPlatzRes(int SaalID) {
 
 		LinkedList<Platz> result = new LinkedList<>();
@@ -224,6 +262,13 @@ public class DB {
 	}
 
 
+	/**
+	 * If Platzreservation in DB exists Add Customer PhonNumber to specified seat.
+	 *
+	 * @param v_ID Vorstellung ID in DB
+	 * @param p_ID Platz ID in DB
+	 * @return PhoneNumber
+	 */
 	private String getResPlatzPhone(int v_ID, int p_ID) {
 
 		try {
@@ -242,7 +287,12 @@ public class DB {
 
 	}
 
-
+	/**
+	 * Make a Reservation for to selected Seat in selected Vorstellung with given PhoneNumber
+	 * @param p {@link Platz}
+	 * @param telNum User Entered PhoneNumber
+	 * @param v_ID ID of selected Vorstellung
+	 */
 	public void resSeat(Platz p, String telNum, int v_ID) {
 
 		try {
@@ -256,6 +306,11 @@ public class DB {
 	}
 
 
+	/**
+	 * Remove a Reservation for the seleccted Seat in selected Vorstellung
+	 * @param p {@link Platz}
+	 * @param v_ID ID of selected Vorstellung
+	 */
 	public void remBooking(Platz p, int v_ID) {
 
 		try {

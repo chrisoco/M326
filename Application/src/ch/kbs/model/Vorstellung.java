@@ -10,7 +10,9 @@ package ch.kbs.model;
  *
  * @author Christopher O'Connor
  * @date 10/05/2019
+ * @version 1.0
  *
+ * Vorstellung Class holding all Information of 1 specific Vorstellung.
  */
 
 
@@ -28,10 +30,10 @@ public class Vorstellung {
 	/**
 	 * Constructs a new {@link Vorstellung}.
 	 *
-	 * @param ID
-	 * @param kinosaal
-	 * @param film
-	 * @param zeit
+	 * @param ID ID of Vorstellung in DB.
+	 * @param kinosaal Kinosaal in which the Movie is showed in.
+	 * @param film Film that is beeing shown.
+	 * @param zeit Time and Date when the Vorstellung is shown.
 	 */
 	public Vorstellung(int ID, Kinosaal kinosaal, Film film, LocalDateTime zeit) {
 		this.ID       = ID;
@@ -64,6 +66,11 @@ public class Vorstellung {
 		return ID;
 	}
 
+	/**
+	 *
+	 * @return Formatted String with Information about {@link Film#getName()}, {@link #zeit}, {@link Kinosaal#getSaalName()}
+	 * (Alita Battle Angle  Friday, 01.March - 20:30    UG, 01)
+	 */
 	public String getVorstellungInfo() {
 		return String.format("%s\t\t%s\t\t%s",
 				this.film.getName(),
@@ -71,6 +78,10 @@ public class Vorstellung {
 				this.kinosaal.getSaalName());
 	}
 
+	/**
+	 *
+	 * @return Formatted Time (Friday, 01.March - 20:30)
+	 */
 	public String getTimeLoc() {
 		return String.format("%s : %s",
 				zeit.format(DateTimeFormatter.ofPattern("EEEE, dd.MMMM - HH:mm")),
