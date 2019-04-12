@@ -1,6 +1,6 @@
 ## M326
 
-Objektorientiert entwerfen und implementieren
+Objektorientiert entwerfen und implementieren<br>
 <a href="https://www.codefactor.io/repository/github/chrisoco/m326"><img src="https://www.codefactor.io/repository/github/chrisoco/m326/badge" alt="CodeFactor" /></a>
 
 
