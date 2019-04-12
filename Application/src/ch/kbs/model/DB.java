@@ -237,7 +237,7 @@ public class DB {
 								+ " (`tbl_Vorstellung_FK`, `tbl_Platz_FK`, `Tel`)"
 								+ " VALUE ('" + v_ID + "', '" + p.getID() + "', '" + telNum + "');");
 
-		} catch (SQLException e) {}
+		} catch (SQLException e) { e.printStackTrace(); }
 
 	}
 

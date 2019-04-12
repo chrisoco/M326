@@ -212,7 +212,7 @@ public class Controller {
 
 		cb.setSelected(true);
 		cb. setDisable(true);
-		
+
 		cb.setCheckedColor(Paint.valueOf("#b71010"));
 		cb.setTooltip(new Tooltip(((Platz) cb.getUserData()).getBesucherTel()));
 
