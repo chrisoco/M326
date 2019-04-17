@@ -60,4 +60,8 @@ public class Kinobuchungssystem {
 
 	}
 
+	public Map<String, Film> getFilmMap(){
+		return filmMap;
+	}
+
 }

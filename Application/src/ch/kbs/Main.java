@@ -18,6 +18,7 @@ package ch.kbs;
  *
  */
 
+import ch.kbs.controll.Controller;
 import ch.kbs.model.DB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +54,7 @@ public class Main extends Application {
 
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/Layout.fxml"));
+			loader.setController(new Controller());
 			rootPane = (BorderPane) loader.load();
 
 			primaryStage.centerOnScreen();

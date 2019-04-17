@@ -46,33 +46,33 @@ import java.util.List;
 public class Controller {
 
 	@FXML
-	private JFXDatePicker dateField;
+	public  JFXDatePicker dateField;
 	@FXML
-	private VBox movieContainer;
+	public  VBox movieContainer;
 	@FXML
 	private VBox saalSitz;
 	@FXML
-	private JFXTextField userPhoneField;
+	public JFXTextField userPhoneField;
 	@FXML
 	private Label selMovieLabel;
 	@FXML
-	private Label selSaalLabel;
+	public Label selSaalLabel;
 	@FXML
 	private Label selSeat;
 	@FXML
-	private JFXButton resButton;
+	public JFXButton resButton;
 	@FXML
-	private JFXButton showRes;
+	public JFXButton showRes;
 	@FXML
 	private StackPane dialogPane;
+	public JFXDialog jfxDialog;
+
+	public  GridPane seatGrid;
+	public  Vorstellung currVorstellung;
 
 
-	private GridPane seatGrid;
-	private Vorstellung currVorstellung;
-
-
-	private static Kinobuchungssystem KBS;
-	private static List<Platz> resList;
+	public  static Kinobuchungssystem KBS;
+	public static List<Platz> resList;
 	private static List<Platz> remList;
 
 
@@ -109,8 +109,8 @@ public class Controller {
 	 *
 	 * Add all Films to GUI in a Gridpane with:
 	 * Image {@link Film#getImg()}
-	 * Name {@link Film#getName()}
-	 * Desc {@link Film#getDesc()}
+	 * Name  {@link Film#getName()}
+	 * Desc  {@link Film#getDesc()}
 	 *
 	 * Add List to each Film containing Time the Movie Runs at {@link #getFilmTimes(Film)}.
 	 */
@@ -206,7 +206,7 @@ public class Controller {
 	 * else it will be free to Book.
 	 *
 	 */
-	private void showVorstellung() {
+	public void showVorstellung() {
 
 		seatGrid.getChildren().clear();
 
@@ -234,6 +234,7 @@ public class Controller {
 				if(seat.isSelected()) resList.add((Platz) seat.getUserData());
 				else resList.remove(seat.getUserData());
 				selSeat.setText(selectedPlaetze());
+				phoneValidator();
 
 			});
 
@@ -347,7 +348,7 @@ public class Controller {
 	 * Remove all Bookings from the Selected Seats.
 	 */
 	@FXML
-	private void showRes() {
+	public void showRes() {
 
 		remList.clear();
 
@@ -401,7 +402,7 @@ public class Controller {
 
 		content.setBody(sc);
 
-		JFXDialog jfxDialog = new JFXDialog(dialogPane, content, JFXDialog.DialogTransition.TOP);
+		jfxDialog = new JFXDialog(dialogPane, content, JFXDialog.DialogTransition.TOP);
 
 		JFXButton apply = new JFXButton(" APPLY ");
 		apply.setButtonType(JFXButton.ButtonType.RAISED);
@@ -470,7 +471,7 @@ public class Controller {
 		btn.setStyle("-fx-background-color: #b3ffb1");
 		btn.setPadding(new Insets(10,10,10,10));
 
-		JFXDialog jfxDialog = new JFXDialog(dialogPane, content, JFXDialog.DialogTransition.TOP);
+		jfxDialog = new JFXDialog(dialogPane, content, JFXDialog.DialogTransition.TOP);
 
 		btn.setOnAction(e -> jfxDialog.close());
 
