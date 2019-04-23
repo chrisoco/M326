@@ -155,11 +155,13 @@ public class UnitTests extends Application {
 		System.out.println("\t/> Selecting Seat A6");
 
 		JFXCheckBox cb = (JFXCheckBox) controller.seatGrid.getChildren().get(5);
-
 		Platform.runLater(() -> cb.fire());
-		t.sleep(3000);
+		t.sleep(6000);
 
 		assertTrue(cb.isSelected());
+
+		System.out.println("\t/> Reserving Seat A6");
+
 	}
 
 
@@ -167,10 +169,9 @@ public class UnitTests extends Application {
 	@Order(7)
 	public void resSeat() throws Exception {
 
-		System.out.println("\t/> Reserving Seat A6");
-
 		controller.userPhoneField.setText("0765801234");
 		controller.resButton.setDisable(false);
+		t.sleep(6000);
 
 		Platform.runLater(() -> controller.resButton.fire());
 		t.sleep(6000);
@@ -190,20 +191,16 @@ public class UnitTests extends Application {
 		Platform.runLater(() -> controller.showRes());
 		t.sleep(6000);
 
-		JFXDialog dialog= controller.jfxDialog;
-		HBox box = (HBox) ((VBox)((ScrollPane)((JFXDialogLayout) dialog.getContent()).getBody().get(0))
+		HBox box = (HBox) ((VBox)((ScrollPane)((JFXDialogLayout) controller.jfxDialog.getContent()).getBody().get(0))
 																   .getContent()).getChildren().get(0);
 
 		JFXButton button = (JFXButton) box.getChildren().get(1);
 
-		Platform.runLater(() -> button.fire());
-		t.sleep(3000);
-		Platform.runLater(() -> button.fire());
-		t.sleep(3000);
-		Platform.runLater(() -> button.fire());
-		t.sleep(3000);
+		fireButton(button);
+		fireButton(button);
+		fireButton(button);
 
-		JFXButton apply = (JFXButton) ((JFXDialogLayout) dialog.getContent()).getActions().get(0);
+		JFXButton apply = (JFXButton) ((JFXDialogLayout) controller.jfxDialog.getContent()).getActions().get(0);
 		Platform.runLater(() -> apply.fire());
 		t.sleep(6000);
 
@@ -211,7 +208,7 @@ public class UnitTests extends Application {
 
 	}
 
-	
+
 	@Test
 	@Order(9)
 	public void showVorstellung02() throws Exception {
@@ -229,6 +226,68 @@ public class UnitTests extends Application {
 
 		assertEquals(controller.currVorstellung.getTimeLoc(), controller.selSaalLabel.getText());
 
+	}
+
+
+	@Test
+	@Order(10)
+	public void resMultipleSeats() throws Exception {
+
+
+		System.out.println("\t/> Selecting Seats A1, A2");
+
+		for(int i = 0; i < 10; i++) {
+			JFXCheckBox cb = (JFXCheckBox) controller.seatGrid.getChildren().get(i);
+			Platform.runLater(() -> cb.fire());
+		}
+
+
+		t.sleep(3000);
+
+		assertTrue(((JFXCheckBox) controller.seatGrid.getChildren().get(0)).isSelected());
+
+		resSeat();
+
+	}
+
+
+	@Test
+	@Order(11)
+	void removeMultipleRes() throws Exception {
+
+		System.out.println("\t/> Removing Reservation of Seat A1, A2");
+
+		Platform.runLater(() -> controller.showRes());
+		t.sleep(6000);
+
+		VBox box = ((VBox)((ScrollPane)((JFXDialogLayout) controller.jfxDialog.getContent()).getBody().get(0))
+				.getContent());
+
+		JFXButton b1 = (JFXButton) ((HBox) box.getChildren().get(0)).getChildren().get(1);
+		JFXButton b2 = (JFXButton) ((HBox) box.getChildren().get(1)).getChildren().get(1);
+
+		for(int i = 2; i < 10; i++) {
+			final int j = i;
+			Platform.runLater(() -> ((JFXButton) ((HBox) box.getChildren().get(j)).getChildren().get(1)).fire());
+
+		}
+
+		fireButton(b1);
+		fireButton(b2);
+		fireButton(b2);
+
+		fireButton((JFXButton) ((JFXDialogLayout) controller.jfxDialog.getContent()).getActions().get(0));
+
+		assertTrue(true);
+
+		t.sleep(15000);
+
+	}
+
+	
+	private void fireButton(JFXButton button) throws Exception {
+		Platform.runLater(() -> button.fire());
+		t.sleep(6000);
 	}
 
 
