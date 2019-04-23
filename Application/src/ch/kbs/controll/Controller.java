@@ -209,6 +209,7 @@ public class Controller {
 	public void showVorstellung() {
 
 		seatGrid.getChildren().clear();
+		if(jfxDialog != null) jfxDialog.close();
 
 		selMovieLabel.setText(currVorstellung.getFilm().getName());
 		selSaalLabel .setText(currVorstellung.getTimeLoc());
@@ -358,18 +359,21 @@ public class Controller {
 		ScrollPane sc = new ScrollPane();
 
 		VBox resSeats = new VBox(2);
+		resSeats.setPrefWidth(350);
 
 		for(Platz p : currVorstellung.getPlatzres().getResList()) {
 
-			HBox seatRow = new HBox(120);
+			HBox seatRow = new HBox(80);
 			seatRow.setStyle("-fx-background-color: #e5fffc");
 			seatRow.setPadding(new Insets(10,5,10,5));
 
 			Text text = new Text(p.getResInfo());
+			text.setStyle("-fx-font-family: Consolas");
 
 			JFXButton btn = new JFXButton("Delete");
 			btn.setButtonType(JFXButton.ButtonType.RAISED);
 			btn.setStyle("-fx-background-color: #bf3f3f");
+
 
 			/**
 			 * Change the status of a shown Seat from Delete to Cancel
@@ -444,6 +448,10 @@ public class Controller {
 
 		jfxDialog.show();
 
+		JFXDialogLayout layout = (JFXDialogLayout) jfxDialog.getContent();
+		layout.getActions().get(0);
+
+
 	}
 
 	/**
@@ -452,15 +460,22 @@ public class Controller {
 	private void orderComplete() {
 
 		JFXDialogLayout content = new JFXDialogLayout();
-		content.setHeading(new Text("Order Accepted!"));
+		content.setHeading(new Text(currVorstellung.getFilm().getName()));
 
 
 		VBox box = new VBox();
 
-		box.getChildren().add(new Text(currVorstellung.getVorstellungInfo() + "\n"));
+		Text title = new Text(currVorstellung.getTimeLoc() + "\n\n");
+		title.setStyle("-fx-font-family: Consolas;");
+
+		box.getChildren().add(title);
 
 		for (Platz p : resList) {
-			box.getChildren().add(new Text(p.getResInfo()));
+
+			Text t = new Text(p.getResInfo());
+			t.setStyle("-fx-font-family: Consolas");
+
+			box.getChildren().add(t);
 		}
 
 

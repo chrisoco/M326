@@ -1,3 +1,9 @@
+/*
+ *
+ * M326 LB Kinobuchungssystem
+ *
+ */
+
 package ch.junit;
 
 import ch.kbs.Main;
@@ -6,22 +12,33 @@ import ch.kbs.model.Film;
 import ch.kbs.model.Vorstellung;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.*;
-
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ *
+ * @author Christopher O'Connor
+ * @date 10/05/2019
+ * @version 1.0
+ *
+ * UnitTests
+ *
+ *
+ */
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UnitTests extends Application {
@@ -60,15 +77,6 @@ public class UnitTests extends Application {
 
 	}
 
-	@AfterAll
-	public static void afterClass() {
-
-	}
-
-	@BeforeEach
-	public void setUp() {
-
-	}
 
 	@Test
 	@Order(1)
@@ -79,6 +87,7 @@ public class UnitTests extends Application {
 
 	}
 
+
 	@Test
 	@Order(2)
 	public void defaultMovies() {
@@ -87,6 +96,7 @@ public class UnitTests extends Application {
 		assertFalse(controller.KBS.getFilmMap().isEmpty());
 
 	}
+
 
 	@Test
 	@Order(3)
@@ -103,6 +113,7 @@ public class UnitTests extends Application {
 
 	}
 
+
 	@Test
 	@Order(4)
 	public void tomorrowMovies() {
@@ -115,6 +126,7 @@ public class UnitTests extends Application {
 		assertTrue(map.size() == 1);
 
 	}
+
 
 	@Test
 	@Order(5)
@@ -129,7 +141,7 @@ public class UnitTests extends Application {
 		controller.currVorstellung = (Vorstellung) btn.getUserData();
 
 		Platform.runLater(() -> controller.showVorstellung());
-		t.sleep(1000);
+		t.sleep(5000);
 
 		assertEquals(controller.currVorstellung.getTimeLoc(), controller.selSaalLabel.getText());
 
@@ -143,11 +155,13 @@ public class UnitTests extends Application {
 		System.out.println("\t/> Selecting Seat A6");
 
 		JFXCheckBox cb = (JFXCheckBox) controller.seatGrid.getChildren().get(5);
+
 		Platform.runLater(() -> cb.fire());
-		t.sleep(1000);
+		t.sleep(3000);
 
 		assertTrue(cb.isSelected());
 	}
+
 
 	@Test
 	@Order(7)
@@ -159,22 +173,61 @@ public class UnitTests extends Application {
 		controller.resButton.setDisable(false);
 
 		Platform.runLater(() -> controller.resButton.fire());
-		t.sleep(3000);
+		t.sleep(6000);
 		Platform.runLater(() -> controller.jfxDialog.close());
-		t.sleep(2000);
+		t.sleep(6000);
 
 		assertTrue(controller.resList.isEmpty());
 	}
 
+
 	@Test
 	@Order(8)
-	public static void removeRes() throws Exception {
+	void removeRes() throws Exception {
+
+		System.out.println("\t/> Removing Reservation of Seat A6");
 
 		Platform.runLater(() -> controller.showRes());
-		t.sleep(2000);
+		t.sleep(6000);
 
-		// TODO: Get Button from JFXDialog 
+		JFXDialog dialog= controller.jfxDialog;
+		HBox box = (HBox) ((VBox)((ScrollPane)((JFXDialogLayout) dialog.getContent()).getBody().get(0))
+																   .getContent()).getChildren().get(0);
 
+		JFXButton button = (JFXButton) box.getChildren().get(1);
+
+		Platform.runLater(() -> button.fire());
+		t.sleep(3000);
+		Platform.runLater(() -> button.fire());
+		t.sleep(3000);
+		Platform.runLater(() -> button.fire());
+		t.sleep(3000);
+
+		JFXButton apply = (JFXButton) ((JFXDialogLayout) dialog.getContent()).getActions().get(0);
+		Platform.runLater(() -> apply.fire());
+		t.sleep(6000);
+
+		assertTrue(true);
+
+	}
+
+	
+	@Test
+	@Order(9)
+	public void showVorstellung02() throws Exception {
+
+		System.out.println("\t/> Testing Show Vorstellung -> Captain Marvel 20:30");
+
+		GridPane gp   = (GridPane) controller.movieContainer.getChildren().get(1);
+		HBox timeBox  = (HBox) gp.getChildren().get(2);
+		JFXButton btn = (JFXButton) timeBox.getChildren().get(2);
+
+		controller.currVorstellung = (Vorstellung) btn.getUserData();
+
+		Platform.runLater(() -> controller.showVorstellung());
+		t.sleep(10000);
+
+		assertEquals(controller.currVorstellung.getTimeLoc(), controller.selSaalLabel.getText());
 
 	}
 

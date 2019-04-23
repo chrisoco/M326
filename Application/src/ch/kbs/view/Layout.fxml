@@ -86,7 +86,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="userPhoneField" labelFloat="true" onKeyReleased="#phoneValidator" promptText="Phone Number" GridPane.rowIndex="5">
+                        <JFXTextField fx:id="userPhoneField" labelFloat="true" onKeyReleased="#phoneValidator" promptText="Phone Number" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
@@ -94,10 +94,10 @@
                               <Font size="16.0" />
                            </font>
                            <padding>
-                              <Insets top="5.0" />
+                              <Insets top="10.0" />
                            </padding>
                         </JFXTextField>
-                        <Label fx:id="selSeat" wrapText="true" GridPane.rowIndex="4">
+                        <Label fx:id="selSeat" wrapText="true" GridPane.rowIndex="5">
                            <font>
                               <Font size="16.0" />
                            </font>
