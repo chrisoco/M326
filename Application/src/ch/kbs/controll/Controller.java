@@ -17,6 +17,10 @@ package ch.kbs.controll;
  * Controls of the GUI
  * (Data Handling, Display and User interaction)
  *
+ * Design Patterns:
+ *      - MVC
+ *      - Facade
+ *
  */
 
 import ch.kbs.*;

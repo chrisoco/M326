@@ -284,7 +284,7 @@ public class UnitTests extends Application {
 
 	}
 
-	
+
 	private void fireButton(JFXButton button) throws Exception {
 		Platform.runLater(() -> button.fire());
 		t.sleep(6000);
