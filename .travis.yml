@@ -1,10 +1,9 @@
 language: java
 
-install: true
-
-script: "cd Application/src/ch/kbs; javac Main.java"
-
 sudo: false
+
+script:
+  - mvn clean package sonar:sonar
 
 jdk:
     - oraclejdk10
