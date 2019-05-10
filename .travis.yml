@@ -2,10 +2,10 @@ language: java
 
 install: true
 
-script: "cd Application/src/ch/kbs; javac Main.java; java -jar Main.jar"
+script: "cd Application/src/ch/kbs; javac Main.java"
 
 sudo: false
 
 jdk:
-    - oraclejdk9
+    - oraclejdk10
 
