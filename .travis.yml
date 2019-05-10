@@ -1,1 +1,11 @@
 language: java
+
+install: true
+
+script: "cd Application; mvn test -B"
+
+sudo: false
+
+jdk:
+    - oraclejdk9
+
